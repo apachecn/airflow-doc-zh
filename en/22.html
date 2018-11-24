@@ -1,0 +1,1545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title></title>
+<link href="../style/ebook.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<h1>Command Line Interface</h1>
+<p>Airflow has a very rich command line interface that allows for
+many types of operation on a DAG, starting services, and supporting
+development and testing.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">airflow</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+               <span class="p">{</span><span class="n">resetdb</span><span class="p">,</span><span class="n">render</span><span class="p">,</span><span class="n">variables</span><span class="p">,</span><span class="n">connections</span><span class="p">,</span><span class="n">create_user</span><span class="p">,</span><span class="n">pause</span><span class="p">,</span><span class="n">task_failed_deps</span><span class="p">,</span><span class="n">version</span><span class="p">,</span><span class="n">trigger_dag</span><span class="p">,</span><span class="n">initdb</span><span class="p">,</span><span class="n">test</span><span class="p">,</span><span class="n">unpause</span><span class="p">,</span><span class="n">dag_state</span><span class="p">,</span><span class="n">run</span><span class="p">,</span><span class="n">list_tasks</span><span class="p">,</span><span class="n">backfill</span><span class="p">,</span><span class="n">list_dags</span><span class="p">,</span><span class="n">kerberos</span><span class="p">,</span><span class="n">worker</span><span class="p">,</span><span class="n">webserver</span><span class="p">,</span><span class="n">flower</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">task_state</span><span class="p">,</span><span class="n">pool</span><span class="p">,</span><span class="n">serve_logs</span><span class="p">,</span><span class="n">clear</span><span class="p">,</span><span class="n">upgradedb</span><span class="p">,</span><span class="n">delete_dag</span><span class="p">}</span>
+               <span class="o">...</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments">
+<h2 class="sigil_not_in_toc">Positional Arguments</h2>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>subcommand</kbd></td>
+<td><p class="first">Possible choices: resetdb, render, variables, connections, create_user, pause, task_failed_deps, version, trigger_dag, initdb, test, unpause, dag_state, run, list_tasks, backfill, list_dags, kerberos, worker, webserver, flower, scheduler, task_state, pool, serve_logs, clear, upgradedb, delete_dag</p>
+<p class="last">sub-command help</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Sub-commands:">
+<h2 class="sigil_not_in_toc">Sub-commands:</h2>
+<div class="section" id="resetdb">
+<h3 class="sigil_not_in_toc">resetdb</h3>
+<p>Burn down and rebuild the metadata database</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">resetdb</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">y</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Named Arguments">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-y, --yes</kbd></td>
+<td><p class="first">Do not prompt to confirm reset. Use with care!</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="render">
+<h3 class="sigil_not_in_toc">render</h3>
+<p>Render a task instance&#x2019;s template(s)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">render</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="n">dag_id</span> <span class="n">task_id</span> <span class="n">execution_date</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat1">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+<tr><td class="option-group">
+<kbd>task_id</kbd></td>
+<td>The id of the task</td>
+</tr>
+<tr><td class="option-group">
+<kbd>execution_date</kbd></td>
+<td>The execution date of the DAG</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat1">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="variables">
+<h3 class="sigil_not_in_toc">variables</h3>
+<p>CRUD operations on variables</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">variables</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">KEY</span> <span class="n">VAL</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">g</span> <span class="n">KEY</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">j</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">VAL</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="n">FILEPATH</span><span class="p">]</span>
+                  <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="n">FILEPATH</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">x</span> <span class="n">KEY</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Named Arguments_repeat2">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-s, --set</kbd></td>
+<td>Set a variable</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-g, --get</kbd></td>
+<td>Get value of a variable</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-j, --json</kbd></td>
+<td><p class="first">Deserialize JSON variable</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-d, --default</kbd></td>
+<td>Default value returned if variable does not exist</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-i, --import</kbd></td>
+<td>Import variables from JSON file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-e, --export</kbd></td>
+<td>Export variables to JSON file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-x, --delete</kbd></td>
+<td>Delete a variable</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="connections">
+<h3 class="sigil_not_in_toc">connections</h3>
+<p>List/Add/Delete connections</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">connections</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">conn_id</span> <span class="n">CONN_ID</span><span class="p">]</span>
+                    <span class="p">[</span><span class="o">--</span><span class="n">conn_uri</span> <span class="n">CONN_URI</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">conn_extra</span> <span class="n">CONN_EXTRA</span><span class="p">]</span>
+                    <span class="p">[</span><span class="o">--</span><span class="n">conn_type</span> <span class="n">CONN_TYPE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">conn_host</span> <span class="n">CONN_HOST</span><span class="p">]</span>
+                    <span class="p">[</span><span class="o">--</span><span class="n">conn_login</span> <span class="n">CONN_LOGIN</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">conn_password</span> <span class="n">CONN_PASSWORD</span><span class="p">]</span>
+                    <span class="p">[</span><span class="o">--</span><span class="n">conn_schema</span> <span class="n">CONN_SCHEMA</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">conn_port</span> <span class="n">CONN_PORT</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Named Arguments_repeat3">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-l, --list</kbd></td>
+<td><p class="first">List all connections</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-a, --add</kbd></td>
+<td><p class="first">Add a connection</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-d, --delete</kbd></td>
+<td><p class="first">Delete a connection</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--conn_id</kbd></td>
+<td>Connection id, required to add/delete a connection</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--conn_uri</kbd></td>
+<td>Connection URI, required to add a connection without conn_type</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--conn_extra</kbd></td>
+<td>Connection <cite>Extra</cite> field, optional when adding a connection</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--conn_type</kbd></td>
+<td>Connection type, required to add a connection without conn_uri</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--conn_host</kbd></td>
+<td>Connection host, optional when adding a connection</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--conn_login</kbd></td>
+<td>Connection login, optional when adding a connection</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>--conn_password</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>Connection password, optional when adding a connection</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--conn_schema</kbd></td>
+<td>Connection schema, optional when adding a connection</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--conn_port</kbd></td>
+<td>Connection port, optional when adding a connection</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="create_user">
+<h3 class="sigil_not_in_toc">create_user</h3>
+<p>Create an admin account</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">create_user</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="n">ROLE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">u</span> <span class="n">USERNAME</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="n">EMAIL</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="n">FIRSTNAME</span><span class="p">]</span>
+                    <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">LASTNAME</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">PASSWORD</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">use_random_password</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Named Arguments_repeat4">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-r, --role</kbd></td>
+<td>Role of the user. Existing roles include Admin, User, Op, Viewer, and Public</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-u, --username</kbd></td>
+<td>Username of the user</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-e, --email</kbd></td>
+<td>Email of the user</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-f, --firstname</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>First name of the user</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-l, --lastname</kbd></td>
+<td>Last name of the user</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-p, --password</kbd></td>
+<td>Password of the user</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>--use_random_password</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Do not prompt for password.  Use random string instead</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="pause">
+<h3 class="sigil_not_in_toc">pause</h3>
+<p>Pause a DAG</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">pause</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="n">dag_id</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat2">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat5">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="task_failed_deps">
+<h3 class="sigil_not_in_toc">task_failed_deps</h3>
+<p>Returns the unmet dependencies for a task instance from the perspective of the scheduler. In other words, why a task instance doesn&#x2019;t get scheduled and then queued by the scheduler, and then run by an executor).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">task_failed_deps</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="n">dag_id</span> <span class="n">task_id</span> <span class="n">execution_date</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat3">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+<tr><td class="option-group">
+<kbd>task_id</kbd></td>
+<td>The id of the task</td>
+</tr>
+<tr><td class="option-group">
+<kbd>execution_date</kbd></td>
+<td>The execution date of the DAG</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat6">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="version">
+<h3 class="sigil_not_in_toc">version</h3>
+<p>Show the version</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">version</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="trigger_dag">
+<h3 class="sigil_not_in_toc">trigger_dag</h3>
+<p>Trigger a DAG run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">trigger_dag</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="n">RUN_ID</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">CONF</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="n">EXEC_DATE</span><span class="p">]</span>
+                    <span class="n">dag_id</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat4">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat7">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-r, --run_id</kbd></td>
+<td>Helps to identify this run</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-c, --conf</kbd></td>
+<td>JSON string that gets pickled into the DagRun&#x2019;s conf attribute</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-e, --exec_date</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>The execution date of the DAG</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="initdb">
+<h3 class="sigil_not_in_toc">initdb</h3>
+<p>Initialize the metadata database</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">initdb</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="test">
+<h3 class="sigil_not_in_toc">test</h3>
+<p>Test a task instance. This will run a task without checking for dependencies or recording its state in the database.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">test</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">dr</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">tp</span> <span class="n">TASK_PARAMS</span><span class="p">]</span>
+             <span class="n">dag_id</span> <span class="n">task_id</span> <span class="n">execution_date</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat5">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+<tr><td class="option-group">
+<kbd>task_id</kbd></td>
+<td>The id of the task</td>
+</tr>
+<tr><td class="option-group">
+<kbd>execution_date</kbd></td>
+<td>The execution date of the DAG</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat8">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-dr, --dry_run</kbd></td>
+<td><p class="first">Perform a dry run</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-tp, --task_params</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>Sends a JSON params dict to the task</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="unpause">
+<h3 class="sigil_not_in_toc">unpause</h3>
+<p>Resume a paused DAG</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">unpause</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="n">dag_id</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat6">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat9">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="dag_state">
+<h3 class="sigil_not_in_toc">dag_state</h3>
+<p>Get the status of a dag run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">dag_state</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="n">dag_id</span> <span class="n">execution_date</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat7">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+<tr><td class="option-group">
+<kbd>execution_date</kbd></td>
+<td>The execution date of the DAG</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat10">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="run">
+<h3 class="sigil_not_in_toc">run</h3>
+<p>Run a single task instance</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">run</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">pool</span> <span class="n">POOL</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">cfg_path</span> <span class="n">CFG_PATH</span><span class="p">]</span>
+            <span class="p">[</span><span class="o">-</span><span class="n">l</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">A</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">I</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">ship_dag</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">PICKLE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="nb">int</span><span class="p">]</span>
+            <span class="n">dag_id</span> <span class="n">task_id</span> <span class="n">execution_date</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat8">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+<tr><td class="option-group">
+<kbd>task_id</kbd></td>
+<td>The id of the task</td>
+</tr>
+<tr><td class="option-group">
+<kbd>execution_date</kbd></td>
+<td>The execution date of the DAG</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat11">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-m, --mark_success</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Mark jobs as succeeded without running them</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-f, --force</kbd></td>
+<td><p class="first">Ignore previous task instance state, rerun regardless if task already succeeded/failed</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--pool</kbd></td>
+<td>Resource pool to use</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--cfg_path</kbd></td>
+<td>Path to config file to use instead of airflow.cfg</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-l, --local</kbd></td>
+<td><p class="first">Run the task using the LocalExecutor</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-A, --ignore_all_dependencies</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Ignores all non-critical dependencies, including ignore_ti_state and ignore_task_deps</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-i, --ignore_dependencies</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Ignore task-specific dependencies, e.g. upstream, depends_on_past, and retry delay dependencies</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-I, --ignore_depends_on_past</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Ignore depends_on_past dependencies (but respect upstream dependencies)</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--ship_dag</kbd></td>
+<td><p class="first">Pickles (serializes) the DAG and ships it to the worker</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-p, --pickle</kbd></td>
+<td>Serialized pickle object of the entire dag (used internally)</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-int, --interactive</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Do not capture standard output and error streams (useful for interactive debugging)</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="list_tasks">
+<h3 class="sigil_not_in_toc">list_tasks</h3>
+<p>List the tasks within a DAG</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">list_tasks</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="n">dag_id</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat9">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat12">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-t, --tree</kbd></td>
+<td><p class="first">Tree view</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="backfill">
+<h3 class="sigil_not_in_toc">backfill</h3>
+<p>Run subsections of a DAG for a specified date range. If reset_dag_run option is used, backfill will first prompt users whether airflow should clear all the previous dag_run and task_instances within the backfill date range.If rerun_failed_tasks is used, backfill will auto re-run the previous failed task instances within the backfill date range.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">backfill</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="n">TASK_REGEX</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">START_DATE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="n">END_DATE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">-</span><span class="n">x</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">I</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">pool</span> <span class="n">POOL</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">--</span><span class="n">delay_on_limit</span> <span class="n">DELAY_ON_LIMIT</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">dr</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">CONF</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">--</span><span class="n">reset_dagruns</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">rerun_failed_tasks</span><span class="p">]</span>
+                 <span class="n">dag_id</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat10">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat13">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd>-t, --task_regex</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>The regex to filter specific task_ids to backfill (optional)</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-s, --start_date</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>Override start_date YYYY-MM-DD</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-e, --end_date</kbd></td>
+<td>Override end_date YYYY-MM-DD</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-m, --mark_success</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Mark jobs as succeeded without running them</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-l, --local</kbd></td>
+<td><p class="first">Run the task using the LocalExecutor</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-x, --donot_pickle</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Do not attempt to pickle the DAG object to send over to the workers, just tell the workers to run their version of the code.</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-i, --ignore_dependencies</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Skip upstream tasks, run only the tasks matching the regexp. Only works in conjunction with task_regex</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-I, --ignore_first_depends_on_past</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Ignores depends_on_past dependencies for the first set of tasks only (subsequent executions in the backfill DO respect depends_on_past).</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--pool</kbd></td>
+<td>Resource pool to use</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>--delay_on_limit</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Amount of time in seconds to wait when the limit on maximum active dag runs (max_active_runs) has been reached before trying to execute a dag run again.</p>
+<p class="last">Default: 1.0</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-dr, --dry_run</kbd></td>
+<td><p class="first">Perform a dry run</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-v, --verbose</kbd></td>
+<td><p class="first">Make logging output more verbose</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-c, --conf</kbd></td>
+<td>JSON string that gets pickled into the DagRun&#x2019;s conf attribute</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>--reset_dagruns</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">if set, the backfill will delete existing backfill-related DAG runs and start anew with fresh, running DAG runs</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>--rerun_failed_tasks</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">if set, the backfill will auto-rerun all the failed tasks for the backfill date range instead of throwing exceptions</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="list_dags">
+<h3 class="sigil_not_in_toc">list_dags</h3>
+<p>List all the DAGs</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">list_dags</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Named Arguments_repeat14">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-r, --report</kbd></td>
+<td><p class="first">Show DagBag loading report</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="kerberos">
+<h3 class="sigil_not_in_toc">kerberos</h3>
+<p>Start a kerberos ticket renewer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">kerberos</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">kt</span> <span class="p">[</span><span class="n">KEYTAB</span><span class="p">]]</span> <span class="p">[</span><span class="o">--</span><span class="n">pid</span> <span class="p">[</span><span class="n">PID</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">D</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">stdout</span> <span class="n">STDOUT</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">--</span><span class="n">stderr</span> <span class="n">STDERR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">LOG_FILE</span><span class="p">]</span>
+                 <span class="p">[</span><span class="n">principal</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat11">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>principal</kbd></td>
+<td><p class="first">kerberos principal</p>
+<p class="last">Default: airflow</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat15">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-kt, --keytab</kbd></td>
+<td><p class="first">keytab</p>
+<p class="last">Default: airflow.keytab</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--pid</kbd></td>
+<td>PID file location</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-D, --daemon</kbd></td>
+<td><p class="first">Daemonize instead of running in the foreground</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--stdout</kbd></td>
+<td>Redirect stdout to this file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--stderr</kbd></td>
+<td>Redirect stderr to this file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-l, --log-file</kbd></td>
+<td>Location of the log file</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="worker">
+<h3 class="sigil_not_in_toc">worker</h3>
+<p>Start a Celery worker node</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">worker</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">q</span> <span class="n">QUEUES</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">CONCURRENCY</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">cn</span> <span class="n">CELERY_HOSTNAME</span><span class="p">]</span>
+               <span class="p">[</span><span class="o">--</span><span class="n">pid</span> <span class="p">[</span><span class="n">PID</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">D</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">stdout</span> <span class="n">STDOUT</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">stderr</span> <span class="n">STDERR</span><span class="p">]</span>
+               <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">LOG_FILE</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Named Arguments_repeat16">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd>-p, --do_pickle</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Attempt to pickle the DAG object to send over to the workers, instead of letting workers run their version of the code.</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-q, --queues</kbd></td>
+<td><p class="first">Comma delimited list of queues to serve</p>
+<p class="last">Default: default</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-c, --concurrency</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">The number of worker processes</p>
+<p class="last">Default: 16</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-cn, --celery_hostname</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>Set the hostname of celery worker if you have multiple workers on a single machine.</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--pid</kbd></td>
+<td>PID file location</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-D, --daemon</kbd></td>
+<td><p class="first">Daemonize instead of running in the foreground</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--stdout</kbd></td>
+<td>Redirect stdout to this file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--stderr</kbd></td>
+<td>Redirect stderr to this file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-l, --log-file</kbd></td>
+<td>Location of the log file</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="webserver">
+<h3 class="sigil_not_in_toc">webserver</h3>
+<p>Start a Airflow webserver instance</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">webserver</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">PORT</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">w</span> <span class="n">WORKERS</span><span class="p">]</span>
+                  <span class="p">[</span><span class="o">-</span><span class="n">k</span> <span class="p">{</span><span class="n">sync</span><span class="p">,</span><span class="n">eventlet</span><span class="p">,</span><span class="n">gevent</span><span class="p">,</span><span class="n">tornado</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="n">WORKER_TIMEOUT</span><span class="p">]</span>
+                  <span class="p">[</span><span class="o">-</span><span class="n">hn</span> <span class="n">HOSTNAME</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">pid</span> <span class="p">[</span><span class="n">PID</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">D</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">stdout</span> <span class="n">STDOUT</span><span class="p">]</span>
+                  <span class="p">[</span><span class="o">--</span><span class="n">stderr</span> <span class="n">STDERR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">A</span> <span class="n">ACCESS_LOGFILE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">E</span> <span class="n">ERROR_LOGFILE</span><span class="p">]</span>
+                  <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">LOG_FILE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">ssl_cert</span> <span class="n">SSL_CERT</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">ssl_key</span> <span class="n">SSL_KEY</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Named Arguments_repeat17">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-p, --port</kbd></td>
+<td><p class="first">The port on which to run the server</p>
+<p class="last">Default: 8080</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-w, --workers</kbd></td>
+<td><p class="first">Number of workers to run the webserver on</p>
+<p class="last">Default: 4</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-k, --workerclass</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Possible choices: sync, eventlet, gevent, tornado</p>
+<p>The worker class to use for Gunicorn</p>
+<p class="last">Default: sync</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-t, --worker_timeout</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">The timeout for waiting on webserver workers</p>
+<p class="last">Default: 120</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-hn, --hostname</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Set the hostname on which to run the web server</p>
+<p class="last">Default: 0.0.0.0</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--pid</kbd></td>
+<td>PID file location</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-D, --daemon</kbd></td>
+<td><p class="first">Daemonize instead of running in the foreground</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--stdout</kbd></td>
+<td>Redirect stdout to this file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--stderr</kbd></td>
+<td>Redirect stderr to this file</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-A, --access_logfile</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">The logfile to store the webserver access log. Use &#x2018;-&#x2018; to print to stderr.</p>
+<p class="last">Default: -</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-E, --error_logfile</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">The logfile to store the webserver error log. Use &#x2018;-&#x2018; to print to stderr.</p>
+<p class="last">Default: -</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-l, --log-file</kbd></td>
+<td>Location of the log file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--ssl_cert</kbd></td>
+<td>Path to the SSL certificate for the webserver</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--ssl_key</kbd></td>
+<td>Path to the key to use with the SSL certificate</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-d, --debug</kbd></td>
+<td><p class="first">Use the server that ships with Flask in debug mode</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="flower">
+<h3 class="sigil_not_in_toc">flower</h3>
+<p>Start a Celery Flower</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">flower</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">hn</span> <span class="n">HOSTNAME</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">PORT</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">fc</span> <span class="n">FLOWER_CONF</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">u</span> <span class="n">URL_PREFIX</span><span class="p">]</span>
+               <span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="n">BROKER_API</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">pid</span> <span class="p">[</span><span class="n">PID</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">D</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">stdout</span> <span class="n">STDOUT</span><span class="p">]</span>
+               <span class="p">[</span><span class="o">--</span><span class="n">stderr</span> <span class="n">STDERR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">LOG_FILE</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Named Arguments_repeat18">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd>-hn, --hostname</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Set the hostname on which to run the server</p>
+<p class="last">Default: 0.0.0.0</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-p, --port</kbd></td>
+<td><p class="first">The port on which to run the server</p>
+<p class="last">Default: 5555</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-fc, --flower_conf</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>Configuration file for flower</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-u, --url_prefix</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>URL prefix for Flower</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-a, --broker_api</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>Broker api</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--pid</kbd></td>
+<td>PID file location</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-D, --daemon</kbd></td>
+<td><p class="first">Daemonize instead of running in the foreground</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--stdout</kbd></td>
+<td>Redirect stdout to this file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--stderr</kbd></td>
+<td>Redirect stderr to this file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-l, --log-file</kbd></td>
+<td>Location of the log file</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="scheduler">
+<h3 class="sigil_not_in_toc">scheduler</h3>
+<p>Start a scheduler instance</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">scheduler</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">DAG_ID</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="n">RUN_DURATION</span><span class="p">]</span>
+                  <span class="p">[</span><span class="o">-</span><span class="n">n</span> <span class="n">NUM_RUNS</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">pid</span> <span class="p">[</span><span class="n">PID</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">D</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">stdout</span> <span class="n">STDOUT</span><span class="p">]</span>
+                  <span class="p">[</span><span class="o">--</span><span class="n">stderr</span> <span class="n">STDERR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">LOG_FILE</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Named Arguments_repeat19">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-d, --dag_id</kbd></td>
+<td>The id of the dag to run</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-r, --run-duration</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>Set number of seconds to execute before exiting</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-n, --num_runs</kbd></td>
+<td><p class="first">Set the number of runs to execute before exiting</p>
+<p class="last">Default: -1</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-p, --do_pickle</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Attempt to pickle the DAG object to send over to the workers, instead of letting workers run their version of the code.</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--pid</kbd></td>
+<td>PID file location</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-D, --daemon</kbd></td>
+<td><p class="first">Daemonize instead of running in the foreground</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--stdout</kbd></td>
+<td>Redirect stdout to this file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>--stderr</kbd></td>
+<td>Redirect stderr to this file</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-l, --log-file</kbd></td>
+<td>Location of the log file</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="task_state">
+<h3 class="sigil_not_in_toc">task_state</h3>
+<p>Get the status of a task instance</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">task_state</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span> <span class="n">dag_id</span> <span class="n">task_id</span> <span class="n">execution_date</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat12">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+<tr><td class="option-group">
+<kbd>task_id</kbd></td>
+<td>The id of the task</td>
+</tr>
+<tr><td class="option-group">
+<kbd>execution_date</kbd></td>
+<td>The execution date of the DAG</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat20">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="pool">
+<h3 class="sigil_not_in_toc">pool</h3>
+<p>CRUD operations on pools</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">pool</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">NAME</span> <span class="n">SLOT_COUNT</span> <span class="n">POOL_DESCRIPTION</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">g</span> <span class="n">NAME</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">x</span> <span class="n">NAME</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Named Arguments_repeat21">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-s, --set</kbd></td>
+<td>Set pool slot count and description, respectively</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-g, --get</kbd></td>
+<td>Get pool info</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-x, --delete</kbd></td>
+<td>Delete a pool</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="serve_logs">
+<h3 class="sigil_not_in_toc">serve_logs</h3>
+<p>Serve logs generate by worker</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">serve_logs</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="clear">
+<h3 class="sigil_not_in_toc">clear</h3>
+<p>Clear a set of task instance, as if they never ran</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">clear</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="n">TASK_REGEX</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">START_DATE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="n">END_DATE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sd</span> <span class="n">SUBDIR</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">-</span><span class="n">u</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">x</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">dx</span><span class="p">]</span>
+              <span class="n">dag_id</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat13">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat22">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd>-t, --task_regex</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>The regex to filter specific task_ids to backfill (optional)</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-s, --start_date</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td>Override start_date YYYY-MM-DD</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-e, --end_date</kbd></td>
+<td>Override end_date YYYY-MM-DD</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-sd, --subdir</kbd></td>
+<td><p class="first">File location or directory from which to look for the dag</p>
+<p class="last">Default: /Users/kaxil/airflow/dags</p>
+</td>
+</tr>
+<tr><td class="option-group">
+<kbd>-u, --upstream</kbd></td>
+<td><p class="first">Include upstream tasks</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-d, --downstream</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Include downstream tasks</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-c, --no_confirm</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Do not request confirmation</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-f, --only_failed</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Only failed jobs</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-r, --only_running</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Only running jobs</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-x, --exclude_subdags</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Exclude subdags</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-dx, --dag_regex</kbd></td>
+</tr>
+<tr><td>&#xA0;</td>
+<td><p class="first">Search dag_id as regex instead of exact string</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="upgradedb">
+<h3 class="sigil_not_in_toc">upgradedb</h3>
+<p>Upgrade the metadata database to latest version</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">upgradedb</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="delete_dag">
+<h3 class="sigil_not_in_toc">delete_dag</h3>
+<p>Delete all DB records related to the specified DAG</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">airflow</span> <span class="n">delete_dag</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">y</span><span class="p">]</span> <span class="n">dag_id</span>
+</pre>
+</div>
+</div>
+<div class="section" id="Positional Arguments_repeat14">
+<h4 class="sigil_not_in_toc">Positional Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>dag_id</kbd></td>
+<td>The id of the dag</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Named Arguments_repeat23">
+<h4 class="sigil_not_in_toc">Named Arguments</h4>
+<table class="docutils option-list" frame="void" rules="none">
+<colgroup><col class="option">
+<col class="description">
+</colgroup>
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>-y, --yes</kbd></td>
+<td><p class="first">Do not prompt to confirm reset. Use with care!</p>
+<p class="last">Default: False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title></title>
+<link href="../style/ebook.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<h1>Installation</h1>
+<div class="section" id="getting-airflow">
+<h2 class="sigil_not_in_toc">Getting Airflow</h2>
+<p>The easiest way to install the latest stable version of Airflow is with <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install apache-airflow
+</pre>
+</div>
+</div>
+<p>You can also install Airflow with support for extra features like <code class="docutils literal notranslate"><span class="pre">s3</span></code> or <code class="docutils literal notranslate"><span class="pre">postgres</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install apache-airflow<span class="o">[</span>postgres,s3<span class="o">]</span>
+</pre>
+</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>GPL dependency</p>
+<p class="last">One of the dependencies of Apache Airflow by default pulls in a GPL library (&#x2018;unidecode&#x2019;).
+In case this is a concern you can force a non GPL library by issuing
+<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">SLUGIFY_USES_TEXT_UNIDECODE=yes</span></code> and then proceed with the normal installation.
+Please note that this needs to be specified at every upgrade. Also note that if <cite>unidecode</cite>
+is already present on the system the dependency will still be used.</p>
+</div>
+</div>
+<div class="section" id="extra-packages">
+<h2 class="sigil_not_in_toc">Extra Packages</h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">apache-airflow</span></code> PyPI basic package only installs what&#x2019;s needed to get started.
+Subpackages can be installed depending on what will be useful in your
+environment. For instance, if you don&#x2019;t need connectivity with Postgres,
+you won&#x2019;t have to go through the trouble of installing the <code class="docutils literal notranslate"><span class="pre">postgres-devel</span></code>
+yum package, or whatever equivalent applies on the distribution you are using.</p>
+<p>Behind the scenes, Airflow does conditional imports of operators that require
+these extra dependencies.</p>
+<p>Here&#x2019;s the list of the subpackages and what they enable:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%">
+<col width="42%">
+<col width="45%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">subpackage</th>
+<th class="head">install command</th>
+<th class="head">enables</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>all</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[all]</span></code></td>
+<td>All Airflow features known to man</td>
+</tr>
+<tr class="row-odd"><td>all_dbs</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[all_dbs]</span></code></td>
+<td>All databases integrations</td>
+</tr>
+<tr class="row-even"><td>async</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[async]</span></code></td>
+<td>Async worker classes for Gunicorn</td>
+</tr>
+<tr class="row-odd"><td>celery</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[celery]</span></code></td>
+<td>CeleryExecutor</td>
+</tr>
+<tr class="row-even"><td>cloudant</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[cloudant]</span></code></td>
+<td>Cloudant hook</td>
+</tr>
+<tr class="row-odd"><td>crypto</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[crypto]</span></code></td>
+<td>Encrypt connection passwords in metadata db</td>
+</tr>
+<tr class="row-even"><td>devel</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[devel]</span></code></td>
+<td>Minimum dev tools requirements</td>
+</tr>
+<tr class="row-odd"><td>devel_hadoop</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[devel_hadoop]</span></code></td>
+<td>Airflow + dependencies on the Hadoop stack</td>
+</tr>
+<tr class="row-even"><td>druid</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[druid]</span></code></td>
+<td>Druid related operators &amp; hooks</td>
+</tr>
+<tr class="row-odd"><td>gcp_api</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[gcp_api]</span></code></td>
+<td>Google Cloud Platform hooks and operators
+(using <code class="docutils literal notranslate"><span class="pre">google-api-python-client</span></code>)</td>
+</tr>
+<tr class="row-even"><td>hdfs</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[hdfs]</span></code></td>
+<td>HDFS hooks and operators</td>
+</tr>
+<tr class="row-odd"><td>hive</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[hive]</span></code></td>
+<td>All Hive related operators</td>
+</tr>
+<tr class="row-even"><td>jdbc</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[jdbc]</span></code></td>
+<td>JDBC hooks and operators</td>
+</tr>
+<tr class="row-odd"><td>kerbero s</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[kerberos]</span></code></td>
+<td>Kerberos integration for Kerberized Hadoop</td>
+</tr>
+<tr class="row-even"><td>ldap</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[ldap]</span></code></td>
+<td>LDAP authentication for users</td>
+</tr>
+<tr class="row-odd"><td>mssql</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[mssql]</span></code></td>
+<td>Microsoft SQL Server operators and hook,
+support as an Airflow backend</td>
+</tr>
+<tr class="row-even"><td>mysql</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[mysql]</span></code></td>
+<td>MySQL operators and hook, support as an Airflow
+backend. The version of MySQL server has to be
+5.6.4+. The exact version upper bound depends
+on version of <code class="docutils literal notranslate"><span class="pre">mysqlclient</span></code> package. For
+example, <code class="docutils literal notranslate"><span class="pre">mysqlclient</span></code> 1.3.12 can only be
+used with MySQL server 5.6.4 through 5.7.</td>
+</tr>
+<tr class="row-odd"><td>password</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[password]</span></code></td>
+<td>Password authentication for users</td>
+</tr>
+<tr class="row-even"><td>postgres</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[postgres]</span></code></td>
+<td>PostgreSQL operators and hook, support as an
+Airflow backend</td>
+</tr>
+<tr class="row-odd"><td>qds</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[qds]</span></code></td>
+<td>Enable QDS (Qubole Data Service) support</td>
+</tr>
+<tr class="row-even"><td>rabbitmq</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[rabbitmq]</span></code></td>
+<td>RabbitMQ support as a Celery backend</td>
+</tr>
+<tr class="row-odd"><td>redis</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[redis]</span></code></td>
+<td>Redis hooks and sensors</td>
+</tr>
+<tr class="row-even"><td>s3</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[s3]</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">S3KeySensor</span></code>, <code class="docutils literal notranslate"><span class="pre">S3PrefixSensor</span></code></td>
+</tr>
+<tr class="row-odd"><td>samba</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[samba]</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">Hive2SambaOperator</span></code></td>
+</tr>
+<tr class="row-even"><td>slack</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[slack]</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">SlackAPIPostOperator</span></code></td>
+</tr>
+<tr class="row-odd"><td>ssh</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[ssh]</span></code></td>
+<td>SSH hooks and Operator</td>
+</tr>
+<tr class="row-even"><td>vertica</td>
+<td><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[vertica]</span></code></td>
+<td>Vertica hook support as an Airflow backend</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="initiating-airflow-database">
+<h2 class="sigil_not_in_toc">Initiating Airflow Database</h2>
+<p>Airflow requires a database to be initiated before you can run tasks. If
+you&#x2019;re just experimenting and learning Airflow, you can stick with the
+default SQLite option. If you don&#x2019;t want to use SQLite, then take a look at
+<a class="reference internal" href="howto/initialize-database.html"><span class="doc">Initializing a Database Backend</span></a> to setup a different database.</p>
+<p>After configuration, you&#x2019;ll need to initialize the database before you can
+run tasks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>airflow initdb
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

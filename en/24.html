@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title></title>
+<link href="../style/ebook.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<h1>Plugins</h1>
+<p>Airflow has a simple plugin manager built-in that can integrate external
+features to its core by simply dropping files in your
+<code class="docutils literal notranslate"><span class="pre">$AIRFLOW_HOME/plugins</span></code> folder.</p>
+<p>The python modules in the <code class="docutils literal notranslate"><span class="pre">plugins</span></code> folder get imported,
+and <strong>hooks</strong>, <strong>operators</strong>, <strong>sensors</strong>, <strong>macros</strong>, <strong>executors</strong> and web <strong>views</strong>
+get integrated to Airflow&#x2019;s main collections and become available for use.</p>
+<div class="section" id="what-for">
+<h2 class="sigil_not_in_toc">What for?</h2>
+<p>Airflow offers a generic toolbox for working with data. Different
+organizations have different stacks and different needs. Using Airflow
+plugins can be a way for companies to customize their Airflow installation
+to reflect their ecosystem.</p>
+<p>Plugins can be used as an easy way to write, share and activate new sets of
+features.</p>
+<p>There&#x2019;s also a need for a set of more complex applications to interact with
+different flavors of data and metadata.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li>A set of tools to parse Hive logs and expose Hive metadata (CPU /IO / phases/ skew /&#x2026;)</li>
+<li>An anomaly detection framework, allowing people to collect metrics, set thresholds and alerts</li>
+<li>An auditing tool, helping understand who accesses what</li>
+<li>A config-driven SLA monitoring tool, allowing you to set monitored tables and at what time
+they should land, alert people, and expose visualizations of outages</li>
+<li>&#x2026;</li>
+</ul>
+</div>
+<div class="section" id="why-build-on-top-of-airflow">
+<h2 class="sigil_not_in_toc">Why build on top of Airflow?</h2>
+<p>Airflow has many components that can be reused when building an application:</p>
+<ul class="simple">
+<li>A web server you can use to render your views</li>
+<li>A metadata database to store your models</li>
+<li>Access to your databases, and knowledge of how to connect to them</li>
+<li>An array of workers that your application can push workload to</li>
+<li>Airflow is deployed, you can just piggy back on its deployment logistics</li>
+<li>Basic charting capabilities, underlying libraries and abstractions</li>
+</ul>
+</div>
+<div class="section" id="interface">
+<h2 class="sigil_not_in_toc">Interface</h2>
+<p>To create a plugin you will need to derive the
+<code class="docutils literal notranslate"><span class="pre">airflow.plugins_manager.AirflowPlugin</span></code> class and reference the objects
+you want to plug into Airflow. Here&#x2019;s what the class you need to derive
+looks like:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AirflowPlugin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c1"># The name of your plugin (str)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1"># A list of class(es) derived from BaseOperator</span>
+    <span class="n">operators</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># A list of class(es) derived from BaseSensorOperator</span>
+    <span class="n">sensors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># A list of class(es) derived from BaseHook</span>
+    <span class="n">hooks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># A list of class(es) derived from BaseExecutor</span>
+    <span class="n">executors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># A list of references to inject into the macros namespace</span>
+    <span class="n">macros</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># A list of objects created from a class derived</span>
+    <span class="c1"># from flask_admin.BaseView</span>
+    <span class="n">admin_views</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># A list of Blueprint object created from flask.Blueprint</span>
+    <span class="n">flask_blueprints</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># A list of menu links (flask_admin.base.MenuLink)</span>
+    <span class="n">menu_links</span> <span class="o">=</span> <span class="p">[]</span>
+</pre>
+</div>
+</div>
+<p>You can derive it by inheritance (please refer to the example below).
+Please note <code class="docutils literal notranslate"><span class="pre">name</span></code> inside this class must be specified.</p>
+<p>After the plugin is imported into Airflow,
+you can invoke it using statement like</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">airflow.</span><span class="p">{</span><span class="nb">type</span><span class="p">,</span> <span class="n">like</span> <span class="s2">&quot;operators&quot;</span><span class="p">,</span> <span class="s2">&quot;sensors&quot;</span><span class="p">}</span><span class="o">.</span><span class="p">{</span><span class="n">name</span> <span class="n">specificed</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">plugin</span> <span class="n">class</span><span class="p">}</span> <span class="kn">import</span> <span class="o">*</span>
+</pre>
+</div>
+</div>
+<p>When you write your own plugins, make sure you understand them well.
+There are some essential properties for each type of plugin.
+For example,</p>
+<ul class="simple">
+<li>For <code class="docutils literal notranslate"><span class="pre">Operator</span></code> plugin, an <code class="docutils literal notranslate"><span class="pre">execute</span></code> method is compulsory.</li>
+<li>For <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> plugin, a <code class="docutils literal notranslate"><span class="pre">poke</span></code> method returning a Boolean value is compulsory.</li>
+</ul>
+</div>
+<div class="section" id="example">
+<h2 class="sigil_not_in_toc">Example</h2>
+<p>The code below defines a plugin that injects a set of dummy object
+definitions in Airflow.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the class you derive to create a plugin</span>
+<span class="kn">from</span> <span class="nn">airflow.plugins_manager</span> <span class="k">import</span> <span class="n">AirflowPlugin</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">Blueprint</span>
+<span class="kn">from</span> <span class="nn">flask_admin</span> <span class="k">import</span> <span class="n">BaseView</span><span class="p">,</span> <span class="n">expose</span>
+<span class="kn">from</span> <span class="nn">flask_admin.base</span> <span class="k">import</span> <span class="n">MenuLink</span>
+
+<span class="c1"># Importing base classes that we need to derive</span>
+<span class="kn">from</span> <span class="nn">airflow.hooks.base_hook</span> <span class="k">import</span> <span class="n">BaseHook</span>
+<span class="kn">from</span> <span class="nn">airflow.models</span> <span class="k">import</span> <span class="n">BaseOperator</span>
+<span class="kn">from</span> <span class="nn">airflow.sensors.base_sensor_operator</span> <span class="k">import</span> <span class="n">BaseSensorOperator</span>
+<span class="kn">from</span> <span class="nn">airflow.executors.base_executor</span> <span class="k">import</span> <span class="n">BaseExecutor</span>
+
+<span class="c1"># Will show up under airflow.hooks.test_plugin.PluginHook</span>
+<span class="k">class</span> <span class="nc">PluginHook</span><span class="p">(</span><span class="n">BaseHook</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Will show up under airflow.operators.test_plugin.PluginOperator</span>
+<span class="k">class</span> <span class="nc">PluginOperator</span><span class="p">(</span><span class="n">BaseOperator</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Will show up under airflow.sensors.test_plugin.PluginSensorOperator</span>
+<span class="k">class</span> <span class="nc">PluginSensorOperator</span><span class="p">(</span><span class="n">BaseSensorOperator</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Will show up under airflow.executors.test_plugin.PluginExecutor</span>
+<span class="k">class</span> <span class="nc">PluginExecutor</span><span class="p">(</span><span class="n">BaseExecutor</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Will show up under airflow.macros.test_plugin.plugin_macro</span>
+<span class="k">def</span> <span class="nf">plugin_macro</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Creating a flask admin BaseView</span>
+<span class="k">class</span> <span class="nc">TestView</span><span class="p">(</span><span class="n">BaseView</span><span class="p">):</span>
+    <span class="nd">@expose</span><span class="p">(</span><span class="s1">&apos;/&apos;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># in this example, put your test_plugin/test.html template at airflow/plugins/templates/test_plugin/test.html</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;test_plugin/test.html&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;Hello galaxy!&quot;</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">TestView</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s2">&quot;Test Plugin&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test View&quot;</span><span class="p">)</span>
+
+<span class="c1"># Creating a flask blueprint to integrate the templates and static folder</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span>
+    <span class="s2">&quot;test_plugin&quot;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">,</span>
+    <span class="n">template_folder</span><span class="o">=</span><span class="s1">&apos;templates&apos;</span><span class="p">,</span> <span class="c1"># registers airflow/plugins/templates as a Jinja template folder</span>
+    <span class="n">static_folder</span><span class="o">=</span><span class="s1">&apos;static&apos;</span><span class="p">,</span>
+    <span class="n">static_url_path</span><span class="o">=</span><span class="s1">&apos;/static/test_plugin&apos;</span><span class="p">)</span>
+
+<span class="n">ml</span> <span class="o">=</span> <span class="n">MenuLink</span><span class="p">(</span>
+    <span class="n">category</span><span class="o">=</span><span class="s1">&apos;Test Plugin&apos;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&apos;Test Menu Link&apos;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s1">&apos;https://airflow.incubator.apache.org/&apos;</span><span class="p">)</span>
+
+<span class="c1"># Defining the plugin class</span>
+<span class="k">class</span> <span class="nc">AirflowTestPlugin</span><span class="p">(</span><span class="n">AirflowPlugin</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;test_plugin&quot;</span>
+    <span class="n">operators</span> <span class="o">=</span> <span class="p">[</span><span class="n">PluginOperator</span><span class="p">]</span>
+    <span class="n">sensors</span> <span class="o">=</span> <span class="p">[</span><span class="n">PluginSensorOperator</span><span class="p">]</span>
+    <span class="n">hooks</span> <span class="o">=</span> <span class="p">[</span><span class="n">PluginHook</span><span class="p">]</span>
+    <span class="n">executors</span> <span class="o">=</span> <span class="p">[</span><span class="n">PluginExecutor</span><span class="p">]</span>
+    <span class="n">macros</span> <span class="o">=</span> <span class="p">[</span><span class="n">plugin_macro</span><span class="p">]</span>
+    <span class="n">admin_views</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+    <span class="n">flask_blueprints</span> <span class="o">=</span> <span class="p">[</span><span class="n">bp</span><span class="p">]</span>
+    <span class="n">menu_links</span> <span class="o">=</span> <span class="p">[</span><span class="n">ml</span><span class="p">]</span>
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

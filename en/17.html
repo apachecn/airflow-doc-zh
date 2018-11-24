@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title></title>
+<link href="../style/ebook.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<h1>Running Airflow with upstart</h1>
+<p>Airflow can integrate with upstart based systems. Upstart automatically starts all airflow services for which you
+have a corresponding <code class="docutils literal notranslate"><span class="pre">*.conf</span></code> file in <code class="docutils literal notranslate"><span class="pre">/etc/init</span></code> upon system boot. On failure, upstart automatically restarts
+the process (until it reaches re-spawn limit set in a <code class="docutils literal notranslate"><span class="pre">*.conf</span></code> file).</p>
+<p>You can find sample upstart job files in the <code class="docutils literal notranslate"><span class="pre">scripts/upstart</span></code> directory. These files have been tested on
+Ubuntu 14.04 LTS. You may have to adjust <code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">on</span></code> and <code class="docutils literal notranslate"><span class="pre">stop</span> <span class="pre">on</span></code> stanzas to make it work on other upstart
+systems. Some of the possible options are listed in <code class="docutils literal notranslate"><span class="pre">scripts/upstart/README</span></code>.</p>
+<p>Modify <code class="docutils literal notranslate"><span class="pre">*.conf</span></code> files as needed and copy to <code class="docutils literal notranslate"><span class="pre">/etc/init</span></code> directory. It is assumed that airflow will run
+under <code class="docutils literal notranslate"><span class="pre">airflow:airflow</span></code>. Change <code class="docutils literal notranslate"><span class="pre">setuid</span></code> and <code class="docutils literal notranslate"><span class="pre">setgid</span></code> in <code class="docutils literal notranslate"><span class="pre">*.conf</span></code> files if you use other user/group</p>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">initctl</span></code> to manually start, stop, view status of the airflow process that has been
+integrated with upstart</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>initctl airflow-webserver status
+</pre>
+</div>
+</div>
+</body>
+</html>

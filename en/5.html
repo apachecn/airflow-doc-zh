@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title></title>
+<link href="../style/ebook.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<h1>Tutorial</h1>
+<p>This tutorial walks you through some of the fundamental Airflow concepts,
+objects, and their usage while writing your first pipeline.</p>
+<div class="section" id="example-pipeline-definition">
+<h2 class="sigil_not_in_toc">Example Pipeline definition</h2>
+<p>Here is an example of a basic pipeline definition. Do not worry if this looks
+complicated, a line by line explanation follows below.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Code that goes along with the Airflow tutorial located at:</span>
+<span class="sd">https://github.com/apache/incubator-airflow/blob/master/airflow/example_dags/tutorial.py</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">airflow</span> <span class="k">import</span> <span class="n">DAG</span>
+<span class="kn">from</span> <span class="nn">airflow.operators.bash_operator</span> <span class="k">import</span> <span class="n">BashOperator</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+
+<span class="n">default_args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&apos;owner&apos;</span><span class="p">:</span> <span class="s1">&apos;airflow&apos;</span><span class="p">,</span>
+    <span class="s1">&apos;depends_on_past&apos;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&apos;start_date&apos;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&apos;email&apos;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&apos;airflow@example.com&apos;</span><span class="p">],</span>
+    <span class="s1">&apos;email_on_failure&apos;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&apos;email_on_retry&apos;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&apos;retries&apos;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&apos;retry_delay&apos;</span><span class="p">:</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
+    <span class="c1"># &apos;queue&apos;: &apos;bash_queue&apos;,</span>
+    <span class="c1"># &apos;pool&apos;: &apos;backfill&apos;,</span>
+    <span class="c1"># &apos;priority_weight&apos;: 10,</span>
+    <span class="c1"># &apos;end_date&apos;: datetime(2016, 1, 1),</span>
+<span class="p">}</span>
+
+<span class="n">dag</span> <span class="o">=</span> <span class="n">DAG</span><span class="p">(</span><span class="s1">&apos;tutorial&apos;</span><span class="p">,</span> <span class="n">default_args</span><span class="o">=</span><span class="n">default_args</span><span class="p">)</span>
+
+<span class="c1"># t1, t2 and t3 are examples of tasks created by instantiating operators</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&apos;print_date&apos;</span><span class="p">,</span>
+    <span class="n">bash_command</span><span class="o">=</span><span class="s1">&apos;date&apos;</span><span class="p">,</span>
+    <span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">)</span>
+
+<span class="n">t2</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&apos;sleep&apos;</span><span class="p">,</span>
+    <span class="n">bash_command</span><span class="o">=</span><span class="s1">&apos;sleep 5&apos;</span><span class="p">,</span>
+    <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">)</span>
+
+<span class="n">templated_command</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    {</span><span class="si">% f</span><span class="s2">or i in range(5) %}</span>
+<span class="s2">        echo &quot;{{ ds }}&quot;</span>
+<span class="s2">        echo &quot;{{ macros.ds_add(ds, 7)}}&quot;</span>
+<span class="s2">        echo &quot;{{ params.my_param }}&quot;</span>
+<span class="s2">    {</span><span class="si">% e</span><span class="s2">ndfor %}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">t3</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&apos;templated&apos;</span><span class="p">,</span>
+    <span class="n">bash_command</span><span class="o">=</span><span class="n">templated_command</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&apos;my_param&apos;</span><span class="p">:</span> <span class="s1">&apos;Parameter I passed in&apos;</span><span class="p">},</span>
+    <span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">)</span>
+
+<span class="n">t2</span><span class="o">.</span><span class="n">set_upstream</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
+<span class="n">t3</span><span class="o">.</span><span class="n">set_upstream</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="it-s-a-dag-definition-file">
+<h2 class="sigil_not_in_toc">It&#x2019;s a DAG definition file</h2>
+<p>One thing to wrap your head around (it may not be very intuitive for everyone
+at first) is that this Airflow Python script is really
+just a configuration file specifying the DAG&#x2019;s structure as code.
+The actual tasks defined here will run in a different context from
+the context of this script. Different tasks run on different workers
+at different points in time, which means that this script cannot be used
+to cross communicate between tasks. Note that for this
+purpose we have a more advanced feature called <code class="docutils literal notranslate"><span class="pre">XCom</span></code>.</p>
+<p>People sometimes think of the DAG definition file as a place where they
+can do some actual data processing - that is not the case at all!
+The script&#x2019;s purpose is to define a DAG object. It needs to evaluate
+quickly (seconds, not minutes) since the scheduler will execute it
+periodically to reflect the changes if any.</p>
+</div>
+<div class="section" id="importing-modules">
+<h2 class="sigil_not_in_toc">Importing Modules</h2>
+<p>An Airflow pipeline is just a Python script that happens to define an
+Airflow DAG object. Let&#x2019;s start by importing the libraries we will need.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The DAG object; we&apos;ll need this to instantiate a DAG</span>
+<span class="kn">from</span> <span class="nn">airflow</span> <span class="k">import</span> <span class="n">DAG</span>
+
+<span class="c1"># Operators; we need this to operate!</span>
+<span class="kn">from</span> <span class="nn">airflow.operators.bash_operator</span> <span class="k">import</span> <span class="n">BashOperator</span>
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="default-arguments">
+<h2 class="sigil_not_in_toc">Default Arguments</h2>
+<p>We&#x2019;re about to create a DAG and some tasks, and we have the choice to
+explicitly pass a set of arguments to each task&#x2019;s constructor
+(which would become redundant), or (better!) we can define a dictionary
+of default parameters that we can use when creating tasks.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="n">default_args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&apos;owner&apos;</span><span class="p">:</span> <span class="s1">&apos;airflow&apos;</span><span class="p">,</span>
+    <span class="s1">&apos;depends_on_past&apos;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&apos;start_date&apos;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&apos;email&apos;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&apos;airflow@example.com&apos;</span><span class="p">],</span>
+    <span class="s1">&apos;email_on_failure&apos;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&apos;email_on_retry&apos;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&apos;retries&apos;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&apos;retry_delay&apos;</span><span class="p">:</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
+    <span class="c1"># &apos;queue&apos;: &apos;bash_queue&apos;,</span>
+    <span class="c1"># &apos;pool&apos;: &apos;backfill&apos;,</span>
+    <span class="c1"># &apos;priority_weight&apos;: 10,</span>
+    <span class="c1"># &apos;end_date&apos;: datetime(2016, 1, 1),</span>
+<span class="p">}</span>
+</pre>
+</div>
+</div>
+<p>For more information about the BaseOperator&#x2019;s parameters and what they do,
+refer to the <a class="reference internal" href="code.html#airflow.models.BaseOperator" title="airflow.models.BaseOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">airflow.models.BaseOperator</span></code></a> documentation.</p>
+<p>Also, note that you could easily define different sets of arguments that
+would serve different purposes. An example of that would be to have
+different settings between a production and development environment.</p>
+</div>
+<div class="section" id="instantiate-a-dag">
+<h2 class="sigil_not_in_toc">Instantiate a DAG</h2>
+<p>We&#x2019;ll need a DAG object to nest our tasks into. Here we pass a string
+that defines the <code class="docutils literal notranslate"><span class="pre">dag_id</span></code>, which serves as a unique identifier for your DAG.
+We also pass the default argument dictionary that we just defined and
+define a <code class="docutils literal notranslate"><span class="pre">schedule_interval</span></code> of 1 day for the DAG.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dag</span> <span class="o">=</span> <span class="n">DAG</span><span class="p">(</span>
+    <span class="s1">&apos;tutorial&apos;</span><span class="p">,</span> <span class="n">default_args</span><span class="o">=</span><span class="n">default_args</span><span class="p">,</span> <span class="n">schedule_interval</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="tasks">
+<h2 class="sigil_not_in_toc">Tasks</h2>
+<p>Tasks are generated when instantiating operator objects. An object
+instantiated from an operator is called a constructor. The first argument
+<code class="docutils literal notranslate"><span class="pre">task_id</span></code> acts as a unique identifier for the task.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&apos;print_date&apos;</span><span class="p">,</span>
+    <span class="n">bash_command</span><span class="o">=</span><span class="s1">&apos;date&apos;</span><span class="p">,</span>
+    <span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">)</span>
+
+<span class="n">t2</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&apos;sleep&apos;</span><span class="p">,</span>
+    <span class="n">bash_command</span><span class="o">=</span><span class="s1">&apos;sleep 5&apos;</span><span class="p">,</span>
+    <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">)</span>
+</pre>
+</div>
+</div>
+<p>Notice how we pass a mix of operator specific arguments (<code class="docutils literal notranslate"><span class="pre">bash_command</span></code>) and
+an argument common to all operators (<code class="docutils literal notranslate"><span class="pre">retries</span></code>) inherited
+from BaseOperator to the operator&#x2019;s constructor. This is simpler than
+passing every argument for every constructor call. Also, notice that in
+the second task we override the <code class="docutils literal notranslate"><span class="pre">retries</span></code> parameter with <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+<p>The precedence rules for a task are as follows:</p>
+<ol class="arabic simple">
+<li>Explicitly passed arguments</li>
+<li>Values that exist in the <code class="docutils literal notranslate"><span class="pre">default_args</span></code> dictionary</li>
+<li>The operator&#x2019;s default value, if one exists</li>
+</ol>
+<p>A task must include or inherit the arguments <code class="docutils literal notranslate"><span class="pre">task_id</span></code> and <code class="docutils literal notranslate"><span class="pre">owner</span></code>,
+otherwise Airflow will raise an exception.</p>
+</div>
+<div class="section" id="templating-with-jinja">
+<h2 class="sigil_not_in_toc">Templating with Jinja</h2>
+<p>Airflow leverages the power of
+<a class="reference external" href="http://jinja.pocoo.org/docs/dev/">Jinja Templating</a>  and provides
+the pipeline author
+with a set of built-in parameters and macros. Airflow also provides
+hooks for the pipeline author to define their own parameters, macros and
+templates.</p>
+<p>This tutorial barely scratches the surface of what you can do with
+templating in Airflow, but the goal of this section is to let you know
+this feature exists, get you familiar with double curly brackets, and
+point to the most common template variable: <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">ds</span> <span class="pre">}}</span></code> (today&#x2019;s &#x201C;date
+stamp&#x201D;).</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">templated_command</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    {</span><span class="si">% f</span><span class="s2">or i in range(5) %}</span>
+<span class="s2">        echo &quot;{{ ds }}&quot;</span>
+<span class="s2">        echo &quot;{{ macros.ds_add(ds, 7) }}&quot;</span>
+<span class="s2">        echo &quot;{{ params.my_param }}&quot;</span>
+<span class="s2">    {</span><span class="si">% e</span><span class="s2">ndfor %}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">t3</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&apos;templated&apos;</span><span class="p">,</span>
+    <span class="n">bash_command</span><span class="o">=</span><span class="n">templated_command</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&apos;my_param&apos;</span><span class="p">:</span> <span class="s1">&apos;Parameter I passed in&apos;</span><span class="p">},</span>
+    <span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">)</span>
+</pre>
+</div>
+</div>
+<p>Notice that the <code class="docutils literal notranslate"><span class="pre">templated_command</span></code> contains code logic in <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">%}</span></code> blocks,
+references parameters like <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">ds</span> <span class="pre">}}</span></code>, calls a function as in
+<code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">macros.ds_add(ds,</span> <span class="pre">7)}}</span></code>, and references a user-defined parameter
+in <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">params.my_param</span> <span class="pre">}}</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">params</span></code> hook in <code class="docutils literal notranslate"><span class="pre">BaseOperator</span></code> allows you to pass a dictionary of
+parameters and/or objects to your templates. Please take the time
+to understand how the parameter <code class="docutils literal notranslate"><span class="pre">my_param</span></code> makes it through to the template.</p>
+<p>Files can also be passed to the <code class="docutils literal notranslate"><span class="pre">bash_command</span></code> argument, like
+<code class="docutils literal notranslate"><span class="pre">bash_command=&apos;templated_command.sh&apos;</span></code>, where the file location is relative to
+the directory containing the pipeline file (<code class="docutils literal notranslate"><span class="pre">tutorial.py</span></code> in this case). This
+may be desirable for many reasons, like separating your script&#x2019;s logic and
+pipeline code, allowing for proper code highlighting in files composed in
+different languages, and general flexibility in structuring pipelines. It is
+also possible to define your <code class="docutils literal notranslate"><span class="pre">template_searchpath</span></code> as pointing to any folder
+locations in the DAG constructor call.</p>
+<p>Using that same DAG constructor call, it is possible to define
+<code class="docutils literal notranslate"><span class="pre">user_defined_macros</span></code> which allow you to specify your own variables.
+For example, passing <code class="docutils literal notranslate"><span class="pre">dict(foo=&apos;bar&apos;)</span></code> to this argument allows you
+to use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">foo</span> <span class="pre">}}</span></code> in your templates. Moreover, specifying
+<code class="docutils literal notranslate"><span class="pre">user_defined_filters</span></code> allow you to register you own filters. For example,
+passing <code class="docutils literal notranslate"><span class="pre">dict(hello=lambda</span> <span class="pre">name:</span> <span class="pre">&apos;Hello</span> <span class="pre">%s&apos;</span> <span class="pre">%</span> <span class="pre">name)</span></code> to this argument allows
+you to use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">&apos;world&apos;</span> <span class="pre">|</span> <span class="pre">hello</span> <span class="pre">}}</span></code> in your templates. For more information
+regarding custom filters have a look at the
+<a class="reference external" href="http://jinja.pocoo.org/docs/dev/api/#writing-filters">Jinja Documentation</a></p>
+<p>For more information on the variables and macros that can be referenced
+in templates, make sure to read through the <a class="reference internal" href="code.html#macros"><span class="std std-ref">Macros</span></a> section</p>
+</div>
+<div class="section" id="setting-up-dependencies">
+<h2 class="sigil_not_in_toc">Setting up Dependencies</h2>
+<p>We have two simple tasks that do not depend on each other. Here&#x2019;s a few ways
+you can define dependencies between them:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t2</span><span class="o">.</span><span class="n">set_upstream</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
+
+<span class="c1"># This means that t2 will depend on t1</span>
+<span class="c1"># running successfully to run</span>
+<span class="c1"># It is equivalent to</span>
+<span class="c1"># t1.set_downstream(t2)</span>
+
+<span class="n">t3</span><span class="o">.</span><span class="n">set_upstream</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
+
+<span class="c1"># all of this is equivalent to</span>
+<span class="c1"># dag.set_dependency(&apos;print_date&apos;, &apos;sleep&apos;)</span>
+<span class="c1"># dag.set_dependency(&apos;print_date&apos;, &apos;templated&apos;)</span>
+</pre>
+</div>
+</div>
+<p>Note that when executing your script, Airflow will raise exceptions when
+it finds cycles in your DAG or when a dependency is referenced more
+than once.</p>
+</div>
+<div class="section" id="recap">
+<h2 class="sigil_not_in_toc">Recap</h2>
+<p>Alright, so we have a pretty basic DAG. At this point your code should look
+something like this:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Code that goes along with the Airflow located at:</span>
+<span class="sd">http://airflow.readthedocs.org/en/latest/tutorial.html</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">airflow</span> <span class="k">import</span> <span class="n">DAG</span>
+<span class="kn">from</span> <span class="nn">airflow.operators.bash_operator</span> <span class="k">import</span> <span class="n">BashOperator</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+
+<span class="n">default_args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&apos;owner&apos;</span><span class="p">:</span> <span class="s1">&apos;airflow&apos;</span><span class="p">,</span>
+    <span class="s1">&apos;depends_on_past&apos;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&apos;start_date&apos;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&apos;email&apos;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&apos;airflow@example.com&apos;</span><span class="p">],</span>
+    <span class="s1">&apos;email_on_failure&apos;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&apos;email_on_retry&apos;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&apos;retries&apos;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&apos;retry_delay&apos;</span><span class="p">:</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
+    <span class="c1"># &apos;queue&apos;: &apos;bash_queue&apos;,</span>
+    <span class="c1"># &apos;pool&apos;: &apos;backfill&apos;,</span>
+    <span class="c1"># &apos;priority_weight&apos;: 10,</span>
+    <span class="c1"># &apos;end_date&apos;: datetime(2016, 1, 1),</span>
+<span class="p">}</span>
+
+<span class="n">dag</span> <span class="o">=</span> <span class="n">DAG</span><span class="p">(</span>
+    <span class="s1">&apos;tutorial&apos;</span><span class="p">,</span> <span class="n">default_args</span><span class="o">=</span><span class="n">default_args</span><span class="p">,</span> <span class="n">schedule_interval</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># t1, t2 and t3 are examples of tasks created by instantiating operators</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&apos;print_date&apos;</span><span class="p">,</span>
+    <span class="n">bash_command</span><span class="o">=</span><span class="s1">&apos;date&apos;</span><span class="p">,</span>
+    <span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">)</span>
+
+<span class="n">t2</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&apos;sleep&apos;</span><span class="p">,</span>
+    <span class="n">bash_command</span><span class="o">=</span><span class="s1">&apos;sleep 5&apos;</span><span class="p">,</span>
+    <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">)</span>
+
+<span class="n">templated_command</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    {</span><span class="si">% f</span><span class="s2">or i in range(5) %}</span>
+<span class="s2">        echo &quot;{{ ds }}&quot;</span>
+<span class="s2">        echo &quot;{{ macros.ds_add(ds, 7)}}&quot;</span>
+<span class="s2">        echo &quot;{{ params.my_param }}&quot;</span>
+<span class="s2">    {</span><span class="si">% e</span><span class="s2">ndfor %}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">t3</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&apos;templated&apos;</span><span class="p">,</span>
+    <span class="n">bash_command</span><span class="o">=</span><span class="n">templated_command</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&apos;my_param&apos;</span><span class="p">:</span> <span class="s1">&apos;Parameter I passed in&apos;</span><span class="p">},</span>
+    <span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">)</span>
+
+<span class="n">t2</span><span class="o">.</span><span class="n">set_upstream</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
+<span class="n">t3</span><span class="o">.</span><span class="n">set_upstream</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="testing">
+<h2 class="sigil_not_in_toc">Testing</h2>
+<div class="section" id="running-the-script">
+<h3 class="sigil_not_in_toc">Running the Script</h3>
+<p>Time to run some tests. First let&#x2019;s make sure that the pipeline
+parses. Let&#x2019;s assume we&#x2019;re saving the code from the previous step in
+<code class="docutils literal notranslate"><span class="pre">tutorial.py</span></code> in the DAGs folder referenced in your <code class="docutils literal notranslate"><span class="pre">airflow.cfg</span></code>.
+The default location for your DAGs is <code class="docutils literal notranslate"><span class="pre">~/airflow/dags</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python ~/airflow/dags/tutorial.py
+</pre>
+</div>
+</div>
+<p>If the script does not raise an exception it means that you haven&#x2019;t done
+anything horribly wrong, and that your Airflow environment is somewhat
+sound.</p>
+</div>
+<div class="section" id="command-line-metadata-validation">
+<h3 class="sigil_not_in_toc">Command Line Metadata Validation</h3>
+<p>Let&#x2019;s run a few commands to validate this script further.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># print the list of active DAGs</span>
+airflow list_dags
+
+<span class="c1"># prints the list of tasks the &quot;tutorial&quot; dag_id</span>
+airflow list_tasks tutorial
+
+<span class="c1"># prints the hierarchy of tasks in the tutorial DAG</span>
+airflow list_tasks tutorial --tree
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3 class="sigil_not_in_toc">Testing</h3>
+<p>Let&#x2019;s test by running the actual task instances on a specific date. The
+date specified in this context is an <code class="docutils literal notranslate"><span class="pre">execution_date</span></code>, which simulates the
+scheduler running your task or dag at a specific date + time:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># command layout: command subcommand dag_id task_id date</span>
+
+<span class="c1"># testing print_date</span>
+airflow <span class="nb">test</span> tutorial print_date <span class="m">2015</span>-06-01
+
+<span class="c1"># testing sleep</span>
+airflow <span class="nb">test</span> tutorial sleep <span class="m">2015</span>-06-01
+</pre>
+</div>
+</div>
+<p>Now remember what we did with templating earlier? See how this template
+gets rendered and executed by running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># testing templated</span>
+airflow <span class="nb">test</span> tutorial templated <span class="m">2015</span>-06-01
+</pre>
+</div>
+</div>
+<p>This should result in displaying a verbose log of events and ultimately
+running your bash command and printing the result.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">airflow</span> <span class="pre">test</span></code> command runs task instances locally, outputs
+their log to stdout (on screen), doesn&#x2019;t bother with dependencies, and
+doesn&#x2019;t communicate state (running, success, failed, &#x2026;) to the database.
+It simply allows testing a single task instance.</p>
+</div>
+<div class="section" id="backfill">
+<h3 class="sigil_not_in_toc">Backfill</h3>
+<p>Everything looks like it&#x2019;s running fine so let&#x2019;s run a backfill.
+<code class="docutils literal notranslate"><span class="pre">backfill</span></code> will respect your dependencies, emit logs into files and talk to
+the database to record status. If you do have a webserver up, you&#x2019;ll be able
+to track the progress. <code class="docutils literal notranslate"><span class="pre">airflow</span> <span class="pre">webserver</span></code> will start a web server if you
+are interested in tracking the progress visually as your backfill progresses.</p>
+<p>Note that if you use <code class="docutils literal notranslate"><span class="pre">depends_on_past=True</span></code>, individual task instances
+will depend on the success of the preceding task instance, except for the
+start_date specified itself, for which this dependency is disregarded.</p>
+<p>The date range in this context is a <code class="docutils literal notranslate"><span class="pre">start_date</span></code> and optionally an <code class="docutils literal notranslate"><span class="pre">end_date</span></code>,
+which are used to populate the run schedule with task instances from this dag.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># optional, start a web server in debug mode in the background</span>
+<span class="c1"># airflow webserver --debug &amp;</span>
+
+<span class="c1"># start your backfill on a date range</span>
+airflow backfill tutorial -s <span class="m">2015</span>-06-01 -e <span class="m">2015</span>-06-07
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="what-s-next">
+<h2 class="sigil_not_in_toc">What&#x2019;s Next?</h2>
+<p>That&#x2019;s it, you&#x2019;ve written, tested and backfilled your very first Airflow
+pipeline. Merging your code into a code repository that has a master scheduler
+running against it should get it to get triggered and run every day.</p>
+<p>Here&#x2019;s a few things you might want to do next:</p>
+<ul>
+<li><p class="first">Take an in-depth tour of the UI - click all the things!</p>
+</li>
+<li><p class="first">Keep reading the docs! Especially the sections on:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Command line interface</li>
+<li>Operators</li>
+<li>Macros</li>
+</ul>
+</div>
+</blockquote>
+</li>
+<li><p class="first">Write your first pipeline!</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

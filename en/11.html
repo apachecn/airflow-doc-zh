@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title></title>
+<link href="../style/ebook.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<h1>Securing Connections</h1>
+<p>By default, Airflow will save the passwords for the connection in plain text
+within the metadata database. The <code class="docutils literal notranslate"><span class="pre">crypto</span></code> package is highly recommended
+during installation. The <code class="docutils literal notranslate"><span class="pre">crypto</span></code> package does require that your operating
+system have libffi-dev installed.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">crypto</span></code> package was not installed initially, you can still enable encryption for
+connections by following steps below:</p>
+<ol class="arabic simple">
+<li>Install crypto package <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">apache-airflow[crypto]</span></code></li>
+<li>Generate fernet_key, using this code snippet below. fernet_key must be a base64-encoded 32-byte key.</li>
+</ol>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cryptography.fernet</span> <span class="k">import</span> <span class="n">Fernet</span>
+<span class="n">fernet_key</span><span class="o">=</span> <span class="n">Fernet</span><span class="o">.</span><span class="n">generate_key</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fernet_key</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span> <span class="c1"># your fernet_key, keep it in secured place!</span>
+</pre>
+</div>
+</div>
+<p>3. Replace <code class="docutils literal notranslate"><span class="pre">airflow.cfg</span></code> fernet_key value with the one from step 2.
+Alternatively, you can store your fernet_key in OS environment variable. You
+do not need to change <code class="docutils literal notranslate"><span class="pre">airflow.cfg</span></code> in this case as Airflow will use environment
+variable over the value in <code class="docutils literal notranslate"><span class="pre">airflow.cfg</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note the double underscores</span>
+EXPORT <span class="nv">AIRFLOW__CORE__FERNET_KEY</span> <span class="o">=</span> your_fernet_key
+</pre>
+</div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Restart Airflow webserver.</li>
+<li>For existing connections (the ones that you had defined before installing <code class="docutils literal notranslate"><span class="pre">airflow[crypto]</span></code> and creating a Fernet key), you need to open each connection in the connection admin UI, re-type the password, and save it.</li>
+</ol>
+</body>
+</html>
