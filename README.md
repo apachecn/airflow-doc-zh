@@ -1,6 +1,6 @@
 # Airflow 中文文档
 
-![](https://airflow.apache.org/_images/pin_large.png)
+![](img/logo.png)
 
 > 欢迎任何人参与和完善：一个人可以走的很快，但是一群人却可以走的更远。
 
