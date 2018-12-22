@@ -54,7 +54,7 @@
 | [1 项目](zh/1.md) | |
 | [2 协议](zh/2.md) | |
 | [3 快速开始](zh/3.md) | |
-| [4 安装](zh/4.md) | |
+| [4 安装](zh/4.md) | [@Thinking Chen](https://github.com/cdmikechen) |
 | [5 教程](zh/5.md) | |
 | [6 操作指南](zh/6.md) | |
 | [7 设置配置选项](zh/7.md) | |
