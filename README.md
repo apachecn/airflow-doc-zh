@@ -53,7 +53,7 @@
 | --- | --- |
 | [1 项目](zh/1.md) | |
 | [2 协议](zh/2.md) | |
-| [3 快速开始](zh/3.md) | |
+| [3 快速开始](zh/3.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [4 安装](zh/4.md) | [@Thinking Chen](https://github.com/cdmikechen) |
 | [5 教程](zh/5.md) | |
 | [6 操作指南](zh/6.md) | |
@@ -73,7 +73,7 @@
 | [20 概念](zh/20.md) | |
 | [21 数据分析](zh/21.md) | |
 | [22 命令行界面](zh/22.md) | |
-| [23 调度和触发器](zh/23.md) | |
+| [23 调度和触发器](zh/23.md) | [@Ray](https://github.com/echo-ray) |
 | [24 插件](zh/24.md) | |
 | [25 安全](zh/25.md) | |
 | [26 时区](zh/26.md) | |
