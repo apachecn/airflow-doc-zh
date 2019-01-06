@@ -77,7 +77,7 @@
 | [24 插件](zh/24.md) | |
 | [25 安全](zh/25.md) | |
 | [26 时区](zh/26.md) | |
-| [27 实验性 Rest API](zh/27.md) | |
+| [27 实验性 Rest API](zh/27.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [28 集成](zh/28.md) | |
 | [29 Lineage](zh/29.md) | |
 | [30 常见问题](zh/30.md) | |
