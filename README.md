@@ -52,12 +52,12 @@
 | 章节 | 贡献者 |
 | --- | --- |
 | [1 项目](zh/1.md) | |
-| [2 协议](zh/2.md) | |
+| [2 协议](zh/2.md) | - |
 | [3 快速开始](zh/3.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [4 安装](zh/4.md) | [@Thinking Chen](https://github.com/cdmikechen) |
 | [5 教程](zh/5.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [6 操作指南](zh/6.md) | [@ImPerat0R\_](https://github.com/tssujt) |
-| [7 设置配置选项](zh/7.md) | |
+| [7 设置配置选项](zh/7.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [8 初始化数据库后端](zh/8.md) | |
 | [9 使用操作器](zh/9.md) | |
 | [10 管理连接](zh/10.md) | |
