@@ -63,7 +63,7 @@
 | [10 管理连接](zh/10.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [11 保护连接](zh/11.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [12 写日志](zh/12.md) | [@ImPerat0R\_](https://github.com/tssujt) |
-| [13 用Celery扩大规模](zh/13.md) | |
+| [13 用Celery扩大规模](zh/13.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [14 用Dask扩展](zh/14.md) | |
 | [15 使用Mesos扩展（社区贡献）](zh/15.md) | |
 | [16 使用systemd运行Airflow](zh/16.md) | |
