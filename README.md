@@ -69,7 +69,7 @@
 | [16 使用systemd运行Airflow](zh/16.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [17 使用upstart运行Airflow](zh/17.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [18 使用测试模式配置](zh/18.md) | [@ImPerat0R\_](https://github.com/tssujt) |
-| [19 UI /截图](zh/19.md) | |
+| [19 UI /截图](zh/19.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [20 概念](zh/20.md) | |
 | [21 数据分析](zh/21.md) | |
 | [22 命令行界面](zh/22.md) | |
