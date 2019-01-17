@@ -63,11 +63,11 @@
 | [10 管理连接](zh/10.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [11 保护连接](zh/11.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [12 写日志](zh/12.md) | [@ImPerat0R\_](https://github.com/tssujt) |
-| [13 用Celery扩大规模](zh/13.md) | [@ImPerat0R\_](https://github.com/tssujt) |
-| [14 用Dask扩展](zh/14.md) | [@ImPerat0R\_](https://github.com/tssujt) |
+| [13 使用Celery扩大规模](zh/13.md) | [@ImPerat0R\_](https://github.com/tssujt) |
+| [14 使用Dask扩展](zh/14.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [15 使用Mesos扩展（社区贡献）](zh/15.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [16 使用systemd运行Airflow](zh/16.md) | [@ImPerat0R\_](https://github.com/tssujt) |
-| [17 用upstart运行Airflow](zh/17.md) | |
+| [17 使用upstart运行Airflow](zh/17.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [18 使用测试模式配置](zh/18.md) | |
 | [19 UI /截图](zh/19.md) | |
 | [20 概念](zh/20.md) | |
