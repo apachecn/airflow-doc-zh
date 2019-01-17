@@ -72,7 +72,7 @@
 | [19 UI /截图](zh/19.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [20 概念](zh/20.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [21 数据分析](zh/21.md) | [@ImPerat0R\_](https://github.com/tssujt) |
-| [22 命令行界面](zh/22.md) | |
+| [22 命令行接口](zh/22.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [23 调度和触发器](zh/23.md) | [@Ray](https://github.com/echo-ray) |
 | [24 插件](zh/24.md) | |
 | [25 安全](zh/25.md) | |
