@@ -61,7 +61,7 @@
 | [8 初始化数据库后端](zh/8.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [9 使用操作器](zh/9.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [10 管理连接](zh/10.md) | [@ImPerat0R\_](https://github.com/tssujt) |
-| [11 保护连接](zh/11.md) | |
+| [11 保护连接](zh/11.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [12 写日志](zh/12.md) | |
 | [13 用Celery扩大规模](zh/13.md) | |
 | [14 用Dask扩展](zh/14.md) | |
