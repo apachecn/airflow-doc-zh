@@ -74,7 +74,7 @@
 | [21 数据分析](zh/21.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [22 命令行接口](zh/22.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [23 调度和触发器](zh/23.md) | [@Ray](https://github.com/echo-ray) |
-| [24 插件](zh/24.md) | |
+| [24 插件](zh/24.md) | [@ImPerat0R\_](https://github.com/tssujt) |
 | [25 安全](zh/25.md) | |
 | [26 时区](zh/26.md) | |
 | [27 实验性 Rest API](zh/27.md) | [@ImPerat0R\_](https://github.com/tssujt) |
