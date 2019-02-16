@@ -15,7 +15,6 @@
 ## 负责人
 
 * [@ImPerat0R\_](https://github.com/tssujt)
-* [@飞龙](https://github.com/wizardforcel): 562826179
 
 ## 贡献指南
 

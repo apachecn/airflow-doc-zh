@@ -8,7 +8,7 @@
 
 负责人：
 
-+   [飞龙](https://github.com/wizardforcel)
+* [@ImPerat0R\_](https://github.com/tssujt)
 
 截止时间：领取任务之后的两个星期（每章）
 
