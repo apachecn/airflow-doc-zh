@@ -2,7 +2,7 @@
 
 ![Airflow](img/logo.png)
 
-> 原文：[Apache Airflow Documentation](https://airflow.readthedocs.io/en/latest/project.html)
+> 原文：[Apache Airflow Documentation](https://airflow.readthedocs.io/en/stable/)
 >
 > 协议：[CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 >
