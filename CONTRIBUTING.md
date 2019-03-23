@@ -62,6 +62,8 @@
 +   术语使用
 +   代码格式
 
+原文在`http://airflow.apachecn.org/en/{name}.html`，文件名相同。
+
 ### 三、提交
 
 +   `fork` Github 项目
