@@ -1,6 +1,6 @@
 # 常见问题
 
-> 译者：[zhongjiajie](https://github.com/zhongjiajie)
+> 译者：[@zhongjiajie](https://github.com/zhongjiajie)
 
 ## 为什么我的任务没有被调度？
 

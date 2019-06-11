@@ -1,6 +1,6 @@
 # 概念
 
-> 贡献者：[@ImPerat0R\_](https://github.com/tssujt)
+> 贡献者：[@ImPerat0R\_](https://github.com/tssujt) [@zhongjiajie](https://github.com/zhongjiajie)
 
 Airflow Platform 是用于描述，执行和监控工作流的工具。
 
@@ -86,7 +86,7 @@ Airflow 为许多常见任务提供 Operator ，包括：
 
 如果将 Operator 分配给 DAG，则 Operator 仅由 Airflow 加载。
 
-请参阅[使用Operators](zh/9.md)了解如何使用 Airflow Operator 。
+请参阅[使用Operators](zh/howto/operator.md)了解如何使用 Airflow Operator 。
 
 #### DAG 分配
 
@@ -224,9 +224,9 @@ Airflow 还能够通过操作系统中的环境变量引用连接。但它只支
 
 如果在 Airflow 元数据数据库和环境变量中都定义了具有相同`conn_id`连接，则 Airflow 将仅引用环境变量中的连接（例如，给定`conn_id` `postgres_master`，在开始搜索元数据数据库之前，Airflow 将优先在环境变量中搜索`AIRFLOW_CONN_POSTGRES_MASTER`并直接引用它）。
 
-许多钩子都有一个默认的`conn_id`，使用该挂钩的 Operator 不需要提供显式连接 ID。 例如，[`PostgresHook`](zh/31.md)的默认`conn_id`是`postgres_default` 。
+许多钩子都有一个默认的`conn_id`，使用该挂钩的 Operator 不需要提供显式连接 ID。 例如，[`PostgresHook`](zh/code.md)的默认`conn_id`是`postgres_default` 。
 
-请参阅[管理连接](zh/10.md)以了解如何创建和管理连接。
+请参阅[管理连接](zh/howto/manage-connections.md)以了解如何创建和管理连接。
 
 ### 队列
 
@@ -262,7 +262,7 @@ def pull_function(**context):
 SELECT * FROM {{ task_instance.xcom_pull(task_ids='foo', key='table_name') }}
 ```
 
-请注意，XCom 与[变量](zh/20.md)类似，但专门用于任务间通信而非全局设置。
+请注意，XCom 与[变量](zh/concepts.md)类似，但专门用于任务间通信而非全局设置。
 
 ### 变量
 
@@ -510,7 +510,7 @@ Here's a [url](www.airbnb.com)
 
 ### Jinja 模板
 
-Airflow 充分利用了[Jinja Templating](http://jinja.pocoo.org/docs/dev/)的强大功能，这可以成为与宏结合使用的强大工具（参见[宏](zh/31.md)部分）。
+Airflow 充分利用了[Jinja Templating](http://jinja.pocoo.org/docs/dev/)的强大功能，这可以成为与宏结合使用的强大工具（参见[宏](zh/code.md)部分）。
 
 例如，假设您希望使用`BashOperator`将执行日期作为环境变量传递给 Bash 脚本。
 

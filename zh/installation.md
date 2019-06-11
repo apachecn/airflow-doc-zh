@@ -59,7 +59,7 @@ pip install apache-airflow[postgres,gcp_api]
 
 ## 初始化 Airflow 数据库
 
-在您运行任务之前，Airflow 需要初始化数据库。 如果您只是在试验和学习 Airflow，您可以坚持使用默认的 SQLite 选项。 如果您不想使用 SQLite，请查看[初始化数据库后端](zh/8.md)以设置其他数据库。
+在您运行任务之前，Airflow 需要初始化数据库。 如果您只是在试验和学习 Airflow，您可以坚持使用默认的 SQLite 选项。 如果您不想使用 SQLite，请查看[初始化数据库后端](zh/howto/initialize-database.md)以设置其他数据库。
 
 配置完成后，若您想要运行任务，需要先初始化数据库：
 

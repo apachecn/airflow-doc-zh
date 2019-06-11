@@ -1,12 +1,12 @@
 # 集成
 
-> 贡献者：[@morefreeze](https://github.com/morefreeze)
+> 贡献者：[@morefreeze](https://github.com/morefreeze) [@zhongjiajie](https://github.com/zhongjiajie)
 
-*   [反向代理](#反向代理)
-*   [Azure：Microsoft Azure](#azuremicrosoft-azure)
-*   [AWS：亚马逊网络服务](#aws亚马逊网络服务)
-*   [Databricks](#databricks)
-*   [GCP：Google云端平台](#gcpgoogle云端平台)
+* [反向代理](#反向代理)
+* [Azure：Microsoft Azure](#azuremicrosoft-azure)
+* [AWS：亚马逊网络服务](#aws亚马逊网络服务)
+* [Databricks](#databricks)
+* [GCP：Google云端平台](#gcpgoogle云端平台)
 
 ## 反向代理
 
@@ -432,7 +432,7 @@ load_string(string_data, share_name, directory_name, file_name, **kwargs)
 
 ### Logging
 
-可以将 Airflow 配置为在 Azure Blob Storage 中读取和写入任务日志。 请参阅[将日志写入 Azure Blob Storage](zh/12.md#将日志写入azure-blob-storage) 。
+可以将 Airflow 配置为在 Azure Blob Storage 中读取和写入任务日志。 请参阅[将日志写入 Azure Blob Storage](zh/howto/write-logs.md#将日志写入azure-blob-storage) 。
 
 ### Azure Data Lake
 

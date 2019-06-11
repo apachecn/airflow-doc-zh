@@ -1,61 +1,61 @@
 # 使用 Operators（执行器）
 
-> 贡献者：[@ImPerat0R\_](https://github.com/tssujt)、[@ThinkingChen](https://github.com/cdmikechen)
+> 贡献者：[@ImPerat0R\_](https://github.com/tssujt)、[@ThinkingChen](https://github.com/cdmikechen) [@zhongjiajie](https://github.com/zhongjiajie)
 
 operator（执行器）代表一个理想情况下是幂等的任务。operator（执行器）决定了 DAG 运行时实际执行的内容。
 
-有关更多信息，请参阅[Operators Concepts](zh/20.md)文档和[Operators API Reference](zh/31.md) 。
+有关更多信息，请参阅[Operators Concepts](zh/concepts.md)文档和[Operators API Reference](zh/code.md) 。
 
-* [BashOperator](zh/9.md)
-  * [模板](zh/9.md)
-  * [故障排除](zh/9.md)
-    * [找不到 Jinja 模板](zh/9.md)
-* [PythonOperator](zh/9.md)
-  * [传递参数](zh/9.md)
-  * [模板](zh/9.md)
-* [Google Cloud Platform Operators](zh/9.md)
-  * [GoogleCloudStorageToBigQueryOperator](zh/9.md)
-  * [GceInstanceStartOperator](zh/9.md)
-  * [GceInstanceStopOperator](zh/9.md)
-  * [GceSetMachineTypeOperator](zh/9.md)
-  * [GcfFunctionDeleteOperator](zh/9.md)
-    * [故障排除](zh/9.md)
-  * [GcfFunctionDeployOperator](zh/9.md)
-    * [故障排除](zh/9.md)
-  * [CloudSqlInstanceDatabaseCreateOperator](zh/9.md)
-    * [参数](zh/9.md)
-    * [使用执行器](zh/9.md)
-    * [模版](zh/9.md)
-    * [更多信息](zh/9.md)
-  * [CloudSqlInstanceDatabaseDeleteOperator](zh/9.md)
-    * [参数](zh/9.md)
-    * [使用执行器](zh/9.md)
-    * [模版](zh/9.md)
-    * [更多信息](zh/9.md)
-  * [CloudSqlInstanceDatabasePatchOperator](zh/9.md)
-    * [参数](zh/9.md)
-    * [使用执行器](zh/9.md)
-    * [模版](zh/9.md)
-    * [更多信息](zh/9.md)
-  * [CloudSqlInstanceDeleteOperator](zh/9.md)
-    * [参数](zh/9.md)
-    * [使用执行器](zh/9.md)
-    * [模版](zh/9.md)
-    * [更多信息](zh/9.md)
-  * [CloudSqlInstanceCreateOperator](zh/9.md)
-    * [参数](zh/9.md)
-    * [使用执行器](zh/9.md)
-    * [模版](zh/9.md)
-    * [更多信息](zh/9.md)
-  * [CloudSqlInstancePatchOperator](zh/9.md)
-    * [参数](zh/9.md)
-    * [使用执行器](zh/9.md)
-    * [模版](zh/9.md)
-    * [更多信息](zh/9.md)
+* [BashOperator](zh/howto/operator.md)
+  * [模板](zh/howto/operator.md)
+  * [故障排除](zh/howto/operator.md)
+    * [找不到 Jinja 模板](zh/howto/operator.md)
+* [PythonOperator](zh/howto/operator.md)
+  * [传递参数](zh/howto/operator.md)
+  * [模板](zh/howto/operator.md)
+* [Google Cloud Platform Operators](zh/howto/operator.md)
+  * [GoogleCloudStorageToBigQueryOperator](zh/howto/operator.md)
+  * [GceInstanceStartOperator](zh/howto/operator.md)
+  * [GceInstanceStopOperator](zh/howto/operator.md)
+  * [GceSetMachineTypeOperator](zh/howto/operator.md)
+  * [GcfFunctionDeleteOperator](zh/howto/operator.md)
+    * [故障排除](zh/howto/operator.md)
+  * [GcfFunctionDeployOperator](zh/howto/operator.md)
+    * [故障排除](zh/howto/operator.md)
+  * [CloudSqlInstanceDatabaseCreateOperator](zh/howto/operator.md)
+    * [参数](zh/howto/operator.md)
+    * [使用执行器](zh/howto/operator.md)
+    * [模版](zh/howto/operator.md)
+    * [更多信息](zh/howto/operator.md)
+  * [CloudSqlInstanceDatabaseDeleteOperator](zh/howto/operator.md)
+    * [参数](zh/howto/operator.md)
+    * [使用执行器](zh/howto/operator.md)
+    * [模版](zh/howto/operator.md)
+    * [更多信息](zh/howto/operator.md)
+  * [CloudSqlInstanceDatabasePatchOperator](zh/howto/operator.md)
+    * [参数](zh/howto/operator.md)
+    * [使用执行器](zh/howto/operator.md)
+    * [模版](zh/howto/operator.md)
+    * [更多信息](zh/howto/operator.md)
+  * [CloudSqlInstanceDeleteOperator](zh/howto/operator.md)
+    * [参数](zh/howto/operator.md)
+    * [使用执行器](zh/howto/operator.md)
+    * [模版](zh/howto/operator.md)
+    * [更多信息](zh/howto/operator.md)
+  * [CloudSqlInstanceCreateOperator](zh/howto/operator.md)
+    * [参数](zh/howto/operator.md)
+    * [使用执行器](zh/howto/operator.md)
+    * [模版](zh/howto/operator.md)
+    * [更多信息](zh/howto/operator.md)
+  * [CloudSqlInstancePatchOperator](zh/howto/operator.md)
+    * [参数](zh/howto/operator.md)
+    * [使用执行器](zh/howto/operator.md)
+    * [模版](zh/howto/operator.md)
+    * [更多信息](zh/howto/operator.md)
 
 ## BashOperator
 
-使用[`BashOperator`](zh/31.md)在[Bash](https://www.gnu.org/software/bash/) shell 中执行命令。
+使用[`BashOperator`](zh/code.md)在[Bash](https://www.gnu.org/software/bash/) shell 中执行命令。
 
 ```py
 run_this = BashOperator(
@@ -66,7 +66,7 @@ run_this = BashOperator(
 
 ### 模板
 
-您可以使用[Jinja 模板](zh/20.md)来参数化`bash_command`参数。
+您可以使用[Jinja 模板](zh/concepts.md)来参数化`bash_command`参数。
 
 ```py
 also_run_this = BashOperator(
@@ -96,7 +96,7 @@ t2 = BashOperator(
 
 ## PythonOperator
 
-使用[`PythonOperator`](zh/31.md)执行 Python 回调。
+使用[`PythonOperator`](zh/code.md)执行 Python 回调。
 
 ```py
  def print_context ( ds , ** kwargs ):
@@ -136,15 +136,15 @@ for i in range(5):
 
 ### 模板
 
-当您将`provide_context`参数设置为`True`，Airflow 会传入一组额外的关键字参数：一个用于每个[Jinja 模板变量](zh/31.md)和一个`templates_dict`参数。
+当您将`provide_context`参数设置为`True`，Airflow 会传入一组额外的关键字参数：一个用于每个[Jinja 模板变量](zh/code.md)和一个`templates_dict`参数。
 
-`templates_dict`参数是模板化的，因此字典中的每个值都被评估为[Jinja 模板](zh/9.md)。
+`templates_dict`参数是模板化的，因此字典中的每个值都被评估为[Jinja 模板](zh/howto/operator.md)。
 
 ## Google 云平台 Operators（执行器）
 
 ### GoogleCloudStorageToBigQueryOperator
 
-使用[`GoogleCloudStorageToBigQueryOperator`](zh/28.md)执行 BigQuery 加载作业。
+使用[`GoogleCloudStorageToBigQueryOperator`](zh/integration.md)执行 BigQuery 加载作业。
 
 ### GceInstanceStartOperator
 

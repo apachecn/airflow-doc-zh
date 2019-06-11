@@ -1,12 +1,12 @@
 # 安全
 
-> 贡献者：[@ImPerat0R\_](https://github.com/tssujt)
+> 贡献者：[@ImPerat0R\_](https://github.com/tssujt) [@zhongjiajie](https://github.com/zhongjiajie)
 
 默认情况下，所有门都是打开的。限制对 Web 应用程序的访问的一种简单方法是在网络级别执行此操作，比如使用 SSH 隧道。
 
 但也可以通过使用其中一个已提供的认证后端或创建自己的认证后端来打开身份验证。
 
-请务必查看[Experimental Rest API](zh/27.md)以保护 API。
+请务必查看[Experimental Rest API](zh/api.md)以保护 API。
 
 ## Web 身份验证
 
@@ -22,7 +22,7 @@ auth_backend = airflow.contrib.auth.backends.password_auth
 
 启用密码身份验证后，需要先创建初始用户凭据，然后才能登录其他人。未在此身份验证后端的迁移中创建初始用户，以防止默认 Airflow 安装受到攻击。必须通过安装 Airflow 的同一台机器上的 Python REPL 来创建新用户。
 
-```py
+```sh
 # navigate to the airflow installation directory
 $ cd ~/airflow
 $ python
