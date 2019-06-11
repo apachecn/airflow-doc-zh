@@ -12,7 +12,7 @@
 + [写日志](zh/howto/write-logs.md)
 + [使用Celery扩大规模](zh/howto/executor/use-celery.md)
 + [使用Dask扩展](zh/howto/executor/use-dask.md)
-+ [使用Mesos扩展（社区贡献）](zh/15.md)
++ [使用Mesos扩展（社区贡献）](zh/howto/executor/use-mesos.md)
 + [使用systemd运行Airflow](zh/howto/run-with-systemd.md)
 + [使用upstart运行Airflow](zh/howto/run-with-upstart.md)
 + [使用测试模式配置](zh/howto/use-test-config.md)
