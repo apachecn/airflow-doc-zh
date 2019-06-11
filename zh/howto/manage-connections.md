@@ -1,6 +1,6 @@
 # 管理连接
 
-> 贡献者：[@ImPerat0R\_](https://github.com/tssujt)、[@ThinkingChen](https://github.com/cdmikechen)
+> 贡献者：[@ImPerat0R\_](https://github.com/tssujt)、[@ThinkingChen](https://github.com/cdmikechen) [@zhongjiajie](https://github.com/zhongjiajie)
 
 Airflow 需要知道如何连接到您的环境。其他系统和服务的主机名，端口，登录名和密码等信息在 UI 的`Admin->Connection`部分中处理。您编写的 pipeline（管道）代码将引用 Connection 对象的“conn_id”。
 
@@ -8,7 +8,7 @@ Airflow 需要知道如何连接到您的环境。其他系统和服务的主机
 
 可以使用 UI 或环境变量创建和管理连接。
 
-有关更多信息，请参阅[Connenctions Concepts](zh/20.md)文档。
+有关更多信息，请参阅[Connenctions Concepts](zh/concepts.md)文档。
 
 ## 使用 UI 创建连接
 
@@ -39,7 +39,7 @@ Airflow 需要知道如何连接到您的环境。其他系统和服务的主机
 
 ### Google Cloud Platform
 
-Google Cloud Platform 连接类型支持[GCP 集成](zh/28.md) 。
+Google Cloud Platform 连接类型支持[GCP 集成](zh/integration.md) 。
 
 #### 对 GCP 进行身份验证
 
@@ -56,19 +56,19 @@ Google Cloud Platform 连接类型支持[GCP 集成](zh/28.md) 。
 bigquery_default
 ```
 
-由[`BigQueryHook`](zh/28.md)钩子使用。
+由[`BigQueryHook`](zh/integration.md)钩子使用。
 
 ```py
 google_cloud_datastore_default
 ```
 
-由[`DatastoreHook`](zh/28.md)钩子使用。
+由[`DatastoreHook`](zh/integration.md)钩子使用。
 
 ```py
 google_cloud_default
 ```
 
-由[`GoogleCloudBaseHook`](zh/28.md)，[`DataFlowHook`](zh/28.md)，[`DataProcHook`](zh/31.md)，[`MLEngineHook`](zh/28.md)和[`GoogleCloudStorageHook`](zh/28.md)挂钩使用。
+由[`GoogleCloudBaseHook`](zh/integration.md)，[`DataFlowHook`](zh/integration.md)，[`DataProcHook`](zh/integration.md)，[`MLEngineHook`](zh/integration.md)和[`GoogleCloudStorageHook`](zh/integration.md)挂钩使用。
 
 #### 配置连接
 
@@ -84,7 +84,7 @@ google_cloud_default
 
 ##### Keyfile JSON
 
-磁盘上的[服务帐户](https://cloud.google.com/docs/authentication/)密钥文件（JSON 格式）的内容。 如果使用此方法进行身份验证，建议[保护您的连接](zh/11.md) 。
+磁盘上的[服务帐户](https://cloud.google.com/docs/authentication/)密钥文件（JSON 格式）的内容。 如果使用此方法进行身份验证，建议[保护您的连接](zh/howto/secure-connections.md) 。
 
 如果使用应用程序默认凭据则不需要
 

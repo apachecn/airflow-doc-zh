@@ -16,6 +16,10 @@
 
 * [@ImPerat0R\_](https://github.com/tssujt)
 
+## 翻译进度
+
+* Airflow 1.10.2 文档已翻译完成
+
 ## 贡献指南
 
 [请见这里](CONTRIBUTING.md)
