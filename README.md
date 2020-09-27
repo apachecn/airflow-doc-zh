@@ -20,6 +20,16 @@
 
 * Airflow 1.10.2 文档已翻译完成
 
+## 下载
+
+### NPM
+
+```
+npm install -g airflow-doc-zh
+airflow-doc-zh <port>
+# 访问 http://localhost:{port} 查看文档
+```
+
 ## 贡献指南
 
 [请见这里](CONTRIBUTING.md)
