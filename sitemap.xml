@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<url> <loc>http://airflow.apachecn.org</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/project</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/license</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/start</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/installation</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/tutorial</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/index</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/set-config</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/initialize-database</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/operator</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/manage-connections</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/secure-connections</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/write-logs</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/executor/use-celery</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/executor/use-dask</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/executor/use-mesos</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/run-with-systemd</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/run-with-upstart</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/howto/use-test-config</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/ui</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/concepts</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/profiling</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/cli</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/scheduler</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/plugins</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/security</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/timezone</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/api</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/integration</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/lineage</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/faq</loc> </url>
+<url> <loc>http://airflow.apachecn.org/#/zh/code</loc> </url>
+</urlset>
