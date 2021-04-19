@@ -8,7 +8,7 @@
 # airflow 需要 home 目录，默认是~/airflow，
 # 但是如果你需要，放在其它位置也是可以的
 # (可选)
-export AIRFLOW_HOME = ~/airflow
+export AIRFLOW_HOME=~/airflow
 
 # 使用 pip 从 pypi 安装
 pip install apache-airflow
